@@ -3,6 +3,7 @@ import 'package:calculator_app/widgets/clipclipper_widget.dart';
 import 'package:calculator_app/widgets/custom_textformfield.dart';
 import 'package:calculator_app/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/styles.dart';
 
@@ -65,7 +66,9 @@ class _OtpSignupScreenState extends State<OtpSignupScreen> {
                             size: 14,
                           ),
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.toNamed('/login');
+                              },
                               child: const Text(
                                 "Sign In",
                                 style: TextStyle(

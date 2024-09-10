@@ -114,7 +114,9 @@ class _SignupScreenState extends State<SignupScreen> {
                               size: 14,
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.toNamed('/login');
+                                },
                                 child: const Text(
                                   "Sign In",
                                   style: TextStyle(

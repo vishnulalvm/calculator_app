@@ -44,7 +44,7 @@ class ShowbottomSheet {
               Expanded(
                 child: Column(
                   children: [
-                    const Text("New Datas"),
+                    const Text("New Datas",style:  TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
                     StreamBuilder(
                         stream: FirebaseFirestore.instance
                             .collection('datas')
@@ -84,11 +84,18 @@ class ShowbottomSheet {
                                   itemBuilder: (context, index) {
                                     // CalculatorDataModel calculatorData = CalculatorDataModel();
                                     final data = CalculatorDataModel.fromJson(snapshort.data!.docs[index]);
-                                    return ListTile(
-                                      title: Text("${data.tdee}",style: const TextStyle(color: Colors.white),),
-                                      subtitle: const Text("hi",style: TextStyle(color: Colors.white),),
-                                      leading: Text("${data.age}",style: const TextStyle(color: Colors.white),),
-                              
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Card(
+                                        color: APPColors.primary,
+                                        child: ListTile(
+                                          
+                                          title: Text("${data.tdee}",style: const TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                                          subtitle: const Text("hi",style: TextStyle(color: Colors.black),),
+                                          leading: Text("${data.age}",style: const TextStyle(color: Colors.black),),
+                                                                      
+                                        ),
+                                      ),
                                     );
                                   }),
                             );

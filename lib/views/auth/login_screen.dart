@@ -37,8 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Get.offNamed('/');
         }
       } on FirebaseAuthException catch (e) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("$e")));
+       Get.snackbar('Error', 'Failed: $e');
       }
     }
   }

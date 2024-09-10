@@ -51,7 +51,7 @@ class AuthSevice {
 
   Future<bool> islogedin() async {
     SharedPreferences shapre = await SharedPreferences.getInstance();
-    String? token = await shapre.getString('token');
+    String? token = shapre.getString('token');
     if (token == null) {
       return false;
     } else {
