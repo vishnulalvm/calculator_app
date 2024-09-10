@@ -1,5 +1,8 @@
+import 'package:calculator_app/models/calculator_data_model.dart';
+import 'package:calculator_app/services/calculator_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class TDEEController extends GetxController {
   final feetController = TextEditingController();
@@ -10,6 +13,8 @@ class TDEEController extends GetxController {
   final selectedGender = 'Female'.obs;
   final selectedActivityLevel = Rx<String?>(null);
   final tdeeResult = ''.obs;
+
+  final CalculatorService calculatorService = CalculatorService();
 
   final List<Map<String, String>> activityLevels = [
     {
@@ -41,12 +46,12 @@ class TDEEController extends GetxController {
 
   void setGender(String gender) {
     selectedGender.value = gender;
-    calculateTDEE(); // Recalculate TDEE when gender changes
+    calculateTDEE();
   }
 
   void setActivityLevel(String? level) {
     selectedActivityLevel.value = level;
-    calculateTDEE(); // Recalculate TDEE when activity level changes
+    calculateTDEE();
   }
 
   void calculateTDEE() {
@@ -72,8 +77,35 @@ class TDEEController extends GetxController {
       double activityFactor = getActivityFactor(selectedActivityLevel.value);
       double tdee = bmr * activityFactor;
       tdeeResult.value = '${tdee.round()} Calories/day';
+      saveDataToFirebase().then((_) {
+        Get.snackbar('Success', 'TDEE calculated and data saved to Firebase');
+      }).catchError((error) {
+        Get.snackbar('Error', 'Failed to save data: $error');
+      });
     } else {
       tdeeResult.value = 'Please fill all fields';
+    }
+  }
+
+  Future<void> saveDataToFirebase() async {
+    var id = const Uuid().v1();
+    CalculatorDataModel calculatorData = CalculatorDataModel(
+      tdee: tdeeResult.value,
+      activityLevel: selectedActivityLevel.value,
+      age: ageController.text,
+      dateTime: DateTime.now(),
+      feet: feetController.text,
+      gender: selectedGender.value,
+      id: id,
+      inch: inchController.text,
+      status: 1,
+      weight: weightController.text,
+    );
+
+    final task = await calculatorService.addData(calculatorData);
+
+    if (task == null) {
+      throw Exception('Failed to add data');
     }
   }
 

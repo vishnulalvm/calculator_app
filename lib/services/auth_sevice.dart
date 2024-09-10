@@ -43,22 +43,19 @@ class AuthSevice {
     return snapshot;
   }
 
-
-  Future<void>logout()async{
+  Future<void> logout() async {
     SharedPreferences shapre = await SharedPreferences.getInstance();
     await shapre.clear();
-   await auth.signOut();
+    await auth.signOut();
   }
 
-  Future<bool>islogedin()async{
-      SharedPreferences shapre = await SharedPreferences.getInstance();
-      String? token = await shapre.getString('token');
-      if(token ==null){
-        return false;
-      }else{
-        return true;
-
-      }
-
+  Future<bool> islogedin() async {
+    SharedPreferences shapre = await SharedPreferences.getInstance();
+    String? token = await shapre.getString('token');
+    if (token == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
