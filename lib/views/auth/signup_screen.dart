@@ -1,6 +1,8 @@
 import 'package:calculator_app/constants/colors.dart';
 import 'package:calculator_app/constants/styles.dart';
 import 'package:calculator_app/views/auth/login_screen.dart';
+import 'package:calculator_app/widgets/custom_textformfield.dart';
+import 'package:calculator_app/widgets/gradient_button.dart';
 import 'package:calculator_app/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,9 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _repasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,21 +44,33 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    // const CustomTextField(hintText: "User Name or Email",),
+                    CustomTextField(
+                      controller: _emailController,
+                      hintText: "User Name or Email",
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    // const CustomTextField(hintText: "Password",),
+                    CustomTextField(
+                      controller: _passwordController,
+                      hintText: "Password",
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    // const CustomTextField(hintText: "Repassword",),
+                    CustomTextField(
+                      controller: _repasswordController,
+                      hintText: "Repassword",
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 40, right: 40),
-                      // child: GradientButton(name: "Sign Up",),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40, right: 40),
+                      child: GradientButton(
+                        onPressed: () {},
+                        name: "Sign Up",
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -87,5 +104,3 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
-
-

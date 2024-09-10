@@ -1,9 +1,16 @@
 import 'package:calculator_app/constants/colors.dart';
+import 'package:calculator_app/firebase_options.dart';
 import 'package:calculator_app/views/home/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -12,7 +19,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // Changed from MaterialApp to GetMaterialApp
       debugShowCheckedModeBanner: false,
       title: 'HungrX',
       theme: ThemeData(
@@ -30,6 +36,19 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      getPages: [
+
+        GetPage(
+          
+
+          name: '/', // Home route
+          page: () => HomeScreen(),
+        ),
+        GetPage(
+          name: '/details', // Details route (example)
+          page: () => DetailsScreen(), // Replace with your actual widget
+        ),
+      ],
       home: HomeScreen(),
     );
   }

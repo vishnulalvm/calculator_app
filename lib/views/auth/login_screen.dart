@@ -1,4 +1,6 @@
 import 'package:calculator_app/constants/colors.dart';
+import 'package:calculator_app/widgets/custom_textformfield.dart';
+import 'package:calculator_app/widgets/gradient_button.dart';
 import 'package:calculator_app/widgets/otp_button.dart';
 import 'package:calculator_app/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,23 +59,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    // const CustomTextField(
-                    //   hintText: "User Name or Email",
-                    // ),
+                    CustomTextField(
+                      controller: _emailController,
+                      hintText: "User Name or Email",
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    // const CustomTextField(
-                    //   hintText: "Password",
-                    // ),
+                    CustomTextField(
+                      controller: _passwordController,
+                      hintText: "Password",
+                    ),
                     const SizedBox(
                       height: 40,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 40, right: 40),
-                      // child: GradientButton(
-                      //   name: "Login",
-                      // ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40, right: 40),
+                      child: GradientButton(
+                        onPressed: () {
+                          
+                        },
+                        name: "Login",
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
