@@ -20,8 +20,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 286,
-      height: 52,
+      height: 70,
       child: TextFormField(
+        autofocus: false,
         obscureText: obscureText,
         controller: controller,
         validator: validator,

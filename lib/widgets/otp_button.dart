@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class OtpWhiteButton extends StatelessWidget {
-  const OtpWhiteButton({super.key});
+  final void Function()? onTap;
+  const OtpWhiteButton({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-
-      },
+      onTap:onTap,
       child: Container(
         width: 305, // Button width
         height: 50, // Button height

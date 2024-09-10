@@ -1,5 +1,6 @@
 import 'package:calculator_app/constants/colors.dart';
-import 'package:calculator_app/views/auth/login_screen.dart';
+import 'package:calculator_app/widgets/clipclipper_widget.dart';
+import 'package:calculator_app/widgets/custom_textformfield.dart';
 import 'package:calculator_app/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class OtpSignupScreen extends StatefulWidget {
 }
 
 class _OtpSignupScreenState extends State<OtpSignupScreen> {
+  final TextEditingController _numberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +42,10 @@ class _OtpSignupScreenState extends State<OtpSignupScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    // const CustomTextField(hintText: "Mobile Number",),
+                    CustomTextField(
+                      controller: _numberController,
+                      hintText: "Mobile Number",
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -80,5 +85,3 @@ class _OtpSignupScreenState extends State<OtpSignupScreen> {
     );
   }
 }
-
-

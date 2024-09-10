@@ -1,17 +1,19 @@
 import 'package:calculator_app/constants/colors.dart';
 import 'package:calculator_app/constants/styles.dart';
 import 'package:calculator_app/controllers/tdee_controller.dart';
-import 'package:calculator_app/views/auth/login_screen.dart';
+import 'package:calculator_app/services/auth_sevice.dart';
+import 'package:calculator_app/widgets/clipclipper_widget.dart';
 import 'package:calculator_app/widgets/custom_dropdown.dart';
 import 'package:calculator_app/widgets/custom_textformfield.dart';
 import 'package:calculator_app/widgets/gradient_button.dart';
 import 'package:calculator_app/widgets/radio_button.dart';
+import 'package:calculator_app/widgets/showbottom_sheet.dart';
 import 'package:calculator_app/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  final TDEEController controller = Get.put(TDEEController());
+  final TDEEController controller = Get.find<TDEEController>();
 
   HomeScreen({super.key});
 
@@ -20,6 +22,13 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: APPColors.primary,
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                AuthSevice().logout().then((value) => Get.offNamed('/login'));
+              },
+              icon: const Icon(Icons.logout))
+        ],
         title: const Text("Calculator App"),
       ),
       body: Padding(
@@ -46,15 +55,13 @@ class HomeScreen extends StatelessWidget {
                             fw: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 140),
-                        CustomDropdownMenu(
-                          // onChanged: controller.setActivityLevel,
-                        ),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 70),
+                        CustomDropdownMenu(),
+                        const SizedBox(height: 30),
                         GenderRadioButtons(
-                          // onChanged: controller.setGender,
-                        ),
-                        const SizedBox(height: 40),
+                            // onChanged: controller.setGender,
+                            ),
+                        const SizedBox(height: 30),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -81,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 30),
                         CustomTextField(
                           hintText: "Weight",
                           controller: controller.weightController,
@@ -119,6 +126,20 @@ class HomeScreen extends StatelessWidget {
                               size: 14,
                               fw: FontWeight.bold,
                             )),
+                        IconButton(
+                          onPressed: () {
+                            ShowbottomSheet.showBottomSheet(context);
+                          },
+                          icon: const Icon(
+                            Icons.keyboard_arrow_up,
+                            color: Colors.white,
+                            size: 32,
+                          ),
+                        ),
+                        const Text(
+                          "History",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                   ),

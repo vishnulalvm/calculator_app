@@ -1,5 +1,10 @@
+import 'package:calculator_app/bindings/home_bindings.dart';
 import 'package:calculator_app/constants/colors.dart';
 import 'package:calculator_app/firebase_options.dart';
+import 'package:calculator_app/views/auth/login_screen.dart';
+import 'package:calculator_app/views/auth/otp_signup_screen.dart';
+import 'package:calculator_app/views/auth/signup_screen.dart';
+import 'package:calculator_app/views/auth/splash_screen.dart';
 import 'package:calculator_app/views/home/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -37,19 +42,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
       getPages: [
-
-        GetPage(
-          
-
-          name: '/', // Home route
-          page: () => HomeScreen(),
-        ),
-        GetPage(
-          name: '/details', // Details route (example)
-          page: () => DetailsScreen(), // Replace with your actual widget
-        ),
+        GetPage(name: '/', page: () => HomeScreen(), binding: HomeBinding()),
+        GetPage(name: '/splash', page: () => const SplashScreen()),
+        GetPage(name: '/login', page: () =>  LoginScreen()),
+        GetPage(name: '/signup', page: () => const SignupScreen()),
+        GetPage(name: '/otp', page: () => const OtpSignupScreen()),
       ],
-      home: HomeScreen(),
+      initialRoute: '/splash',
     );
   }
 }
